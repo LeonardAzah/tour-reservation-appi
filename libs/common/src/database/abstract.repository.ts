@@ -15,9 +15,13 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   }
 
   async findOne(filterQuery: FilterQuery<TDocument>) {
+    if (filterQuery._id && typeof filterQuery._id === 'string') {
+      filterQuery._id = new Types.ObjectId(filterQuery._id);
+    }
     const document = await this.model
       .findOne(filterQuery)
       .lean<TDocument>(true);
+    console.log({ Document: document });
     if (!document) {
       this.logger.warn('Document was not found with filterQuery', filterQuery);
       throw new NotFoundException('Document was not found');
@@ -29,6 +33,9 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     filterQuery: FilterQuery<TDocument>,
     update: UpdateQuery<TDocument>,
   ): Promise<TDocument> {
+    if (filterQuery._id && typeof filterQuery._id === 'string') {
+      filterQuery._id = new Types.ObjectId(filterQuery._id);
+    }
     const document = await this.model
       .findOneAndUpdate(filterQuery, update, {
         new: true,
@@ -48,6 +55,9 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   async findOneAndDelete(
     filterQuery: FilterQuery<TDocument>,
   ): Promise<TDocument> {
+    if (filterQuery._id && typeof filterQuery._id === 'string') {
+      filterQuery._id = new Types.ObjectId(filterQuery._id);
+    }
     return this.model.findOneAndDelete(filterQuery).lean<TDocument>(true);
   }
 }
