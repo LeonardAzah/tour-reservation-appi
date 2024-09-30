@@ -25,5 +25,18 @@ service:
     volumes:
       - .:/usr/src/app
 
+  payments:
+    build:
+      context: .
+      dockerfile: ./apps/payments/Dockerfile
+      target: development
+    command: npm run start:dev payments
+    env_file:
+      - ./apps/payments/.env
+    ports:
+      - '5000:5000'
+    volumes:
+      - .:/usr/src/app
+
   mongo:
     image: mongo
