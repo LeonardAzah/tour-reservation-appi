@@ -21,7 +21,6 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     const document = await this.model
       .findOne(filterQuery)
       .lean<TDocument>(true);
-    console.log({ Document: document });
     if (!document) {
       this.logger.warn('Document was not found with filterQuery', filterQuery);
       throw new NotFoundException('Document was not found');

@@ -7,7 +7,7 @@ COPY tsconfig.json tsconfig.json
 
 RUN npm install
 
-COPY apps/auth apps/auth
+COPY apps/reservations apps/reservations
 COPY libs libs
 
 RUN npm run build
@@ -16,7 +16,7 @@ RUN npm run build
 FROM node:alpine As production
 
 ARG  NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
+ENV NODE_ENV=${NODE_ENV} 
 
 WORKDIR /usr/src/app
 
@@ -26,4 +26,4 @@ RUN npm install --prod
 
 COPY --from=development /usr/src/app/dist ./dist
 
-CMD [ "node", "dist/apps/auth/main" ]
+CMD [ "node", "dist/apps/reservations/main" ]

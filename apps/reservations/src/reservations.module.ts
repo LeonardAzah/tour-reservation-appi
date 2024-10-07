@@ -2,13 +2,12 @@ import { Module } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
 import { ReservationsController } from './reservations.controller';
 import {
-  AUTH_SERVICe,
+  AUTH_SERVICE,
   DatabaseModule,
   LoggerModule,
   PAYMENTS_SERVICE,
 } from '@app/common';
 import { ReservationRepository } from './reservation.repository';
-import * as path from 'path';
 
 import {
   ReservationDocument,
@@ -39,7 +38,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     }),
     ClientsModule.registerAsync([
       {
-        name: AUTH_SERVICe,
+        name: AUTH_SERVICE,
         useFactory: (configService: ConfigService) => ({
           transport: Transport.TCP,
           options: {

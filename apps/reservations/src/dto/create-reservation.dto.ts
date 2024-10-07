@@ -1,4 +1,3 @@
-import { CreateChargeDto } from '@app/common';
 import { Type } from 'class-transformer';
 import {
   IsDate,
@@ -6,6 +5,7 @@ import {
   IsNotEmptyObject,
   ValidateNested,
 } from 'class-validator';
+import { CreateChargeDto } from '@app/common';
 
 export class CreateReservationDto {
   @IsDate()
