@@ -5,6 +5,7 @@ WORKDIR /usr/src/app
 COPY package.json ./
 COPY tsconfig.json tsconfig.json
 
+RUN cd apps/payments && npm install
 
 RUN npm install
 

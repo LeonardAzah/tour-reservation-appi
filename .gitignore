@@ -2,6 +2,7 @@
 /dist
 /node_modules
 /build
+/e2e
 
 # Logs
 logs

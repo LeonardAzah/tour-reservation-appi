@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Response } from 'express';
-import { UserDocument } from '@app/common';
+import { User } from '@app/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './interfaces/jwt-paylod.interface';
@@ -12,9 +12,9 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  login(user: UserDocument, response: Response) {
+  login(user: User, response: Response) {
     const payload: JwtPayload = {
-      userId: user._id.toHexString(),
+      userId: user.id,
     };
     const expires = new Date();
     expires.setSeconds(
